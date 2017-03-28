@@ -13,6 +13,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator as DoctrineToolPaginator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrinePaginatorAdapter;
 use ApigilityFeedback\DoctrineEntity;
+use Doctrine\ORM\Query\Expr;
 
 class FeedbackService
 {
@@ -113,7 +114,7 @@ class FeedbackService
     public function getFeedbacks($params)
     {
         $qb = new QueryBuilder($this->em);
-        $qb->select('f')->from('ApigilityFeedback\DoctrineEntity\Feedback', 'f');
+        $qb->select('f')->from('ApigilityFeedback\DoctrineEntity\Feedback', 'f')->orderBy(new Expr\OrderBy('f.id', 'DESC'));;
 
         $where = '';
 
